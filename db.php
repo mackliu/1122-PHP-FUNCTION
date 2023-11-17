@@ -1,9 +1,9 @@
 <?php
 
-$rows=all('students');
+$rows=all('students',['dept'=>'3']);
 
 dd($rows);
-function all($table=null,$where=''){
+function all($table=null,$where='',$other=''){
     $dsn="mysql:host=localhost;charset=utf8;dbname=school";
     $pdo=new PDO($dsn,'root','');
     $sql="select * from `$table` ";
@@ -25,8 +25,9 @@ function all($table=null,$where=''){
             $sql .=" $where";
         }
 
+            $sql .=$other;
         //echo $sql;
-        $rows=$pdo->query($sql)->fetchAll();
+        $rows=$pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         return $rows;
     }else{
         echo "錯誤:沒有指定的資料表名稱";
