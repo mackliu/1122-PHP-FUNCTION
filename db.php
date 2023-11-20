@@ -10,7 +10,8 @@
 //echo "<h3>相同條件使用all()</h3>";
 //dd($rows);
 
-$up=update("students",'3',['dept'=>'16','name'=>'張明珠']);
+//$up=update("students",'3',['dept'=>'16','name'=>'張明珠']);
+$up=update("students",['dept'=>2,'status_code'=>'001'],['dept'=>'99','name'=>'張明珠']);
 
 dd($up);
 function all($table=null,$where='',$other=''){
@@ -80,7 +81,7 @@ function update($table,$id,$cols){
     }
 
     $sql .= join(",",$tmp);
-
+    $tmp=[];
     if(is_array($id)){
         foreach($id as $col => $value){
             $tmp[]="`$col`='$value'";
